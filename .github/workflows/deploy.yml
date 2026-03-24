@@ -37,4 +37,4 @@ jobs:
 
       - name: Deploy to Lambda
         run: |
-          aws lambda update-function-code             --function-name my-flask-app             --zip-file fileb://deployment.zip
+          aws lambda update-function-code             --function-name url_shortener            --zip-file fileb://deployment.zip
