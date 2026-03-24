@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snip — URL Shortener</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #08080c;
+        --surface: #111118;
+        --surface2: #181820;
+        --border: rgba(255, 255, 255, 0.07);
+        --border-hover: rgba(255, 255, 255, 0.15);
+        --accent: #7df9c2;
+        --accent-dim: rgba(125, 249, 194, 0.12);
+        --accent-glow: rgba(125, 249, 194, 0.25);
+        --text: #f0f0f2;
+        --text-muted: rgba(240, 240, 242, 0.45);
+        --text-dim: rgba(240, 240, 242, 0.2);
+        --error: #ff6b6b;
+        --font-display: "Syne", sans-serif;
+        --font-mono: "DM Mono", monospace;
+        --radius: 12px;
+        --radius-sm: 8px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-display);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px 80px;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 700px;
+        height: 500px;
+        background: radial-gradient(
+          ellipse,
+          rgba(125, 249, 194, 0.06) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      nav {
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0 64px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .logo-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 12px var(--accent-glow);
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(0.85);
+        }
+      }
+
+      .nav-tag {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+        border: 1px solid var(--border);
+        padding: 5px 12px;
+        border-radius: 999px;
+      }
+
+      .hero {
+        width: 100%;
+        max-width: 720px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 48px;
+        text-align: center;
+      }
+
+      .hero-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .hero-eyebrow::before,
+      .hero-eyebrow::after {
+        content: "";
+        height: 1px;
+        width: 40px;
+        background: var(--accent);
+        opacity: 0.4;
+      }
+
+      h1 {
+        font-size: clamp(42px, 7vw, 72px);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -2px;
+        color: var(--text);
+        margin-bottom: 18px;
+      }
+
+      h1 span {
+        color: var(--accent);
+      }
+
+      .hero-sub {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 720px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 40px;
+        position: relative;
+        z-index: 1;
+        transition: border-color 0.3s;
+      }
+
+      .card:hover {
+        border-color: var(--border-hover);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 40px;
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        border-radius: 0 0 2px 2px;
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 24px;
+      }
+
+      .field-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .field-label .req {
+        color: var(--accent);
+        font-size: 14px;
+        line-height: 1;
+      }
+      .field-hint {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-dim);
+        margin-left: auto;
+        letter-spacing: 0.04em;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-wrap svg.input-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        opacity: 0.35;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        stroke: var(--text);
+        fill: none;
+      }
+
+      input[type="text"],
+      input[type="url"] {
+        width: 100%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        padding: 14px 16px 14px 44px;
+        outline: none;
+        transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+        -webkit-appearance: none;
+      }
+
+      input::placeholder {
+        color: var(--text-dim);
+      }
+
+      input:focus {
+        border-color: rgba(125, 249, 194, 0.4);
+        background: rgba(125, 249, 194, 0.03);
+        box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.06);
+      }
+
+      .input-wrap:focus-within svg.input-icon {
+        opacity: 0.7;
+      }
+
+      .alias-wrap {
+        display: flex;
+        align-items: center;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        transition: border-color 0.25s, box-shadow 0.25s;
+        overflow: hidden;
+      }
+
+      .alias-wrap:focus-within {
+        border-color: rgba(125, 249, 194, 0.4);
+        box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.06);
+      }
+
+      .alias-prefix {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--accent);
+        padding: 14px 12px 14px 16px;
+        white-space: nowrap;
+        border-right: 1px solid var(--border);
+        background: rgba(125, 249, 194, 0.04);
+        flex-shrink: 0;
+      }
+
+      .alias-wrap input {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding-left: 14px;
+        box-shadow: none !important;
+      }
+
+      .alias-wrap input:focus {
+        background: transparent;
+        border: none;
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--surface2);
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        user-select: none;
+        letter-spacing: 0.03em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .pill:hover {
+        border-color: rgba(125, 249, 194, 0.3);
+        color: var(--text);
+      }
+
+      .pill.active {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+        color: var(--accent);
+        box-shadow: 0 0 12px rgba(125, 249, 194, 0.1);
+      }
+
+      .pill svg {
+        width: 11px;
+        height: 11px;
+        stroke: currentColor;
+        fill: none;
+      }
+
+      .custom-date-wrap {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .custom-date-wrap.visible {
+        display: flex;
+      }
+
+      .custom-date-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      input[type="datetime-local"] {
+        background: var(--surface2);
+        border: 1px solid rgba(125, 249, 194, 0.3);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        padding: 10px 14px;
+        outline: none;
+        width: 100%;
+        color-scheme: dark;
+        transition: box-shadow 0.2s;
+      }
+
+      input[type="datetime-local"]:focus {
+        box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.08);
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+      }
+
+      .submit-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .submit-meta {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      .btn-submit {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--accent);
+        color: #040f09;
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        letter-spacing: -0.2px;
+        transition: transform 0.15s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .btn-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(125, 249, 194, 0.25);
+      }
+      .btn-submit:active {
+        transform: translateY(0);
+      }
+      .btn-submit.loading {
+        pointer-events: none;
+        opacity: 0.75;
+      }
+      .btn-submit svg.btn-icon {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        flex-shrink: 0;
+      }
+
+      .spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-top-color: #040f09;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+        flex-shrink: 0;
+      }
+
+      .btn-submit.loading .spinner {
+        display: block;
+      }
+      .btn-submit.loading .btn-icon {
+        display: none;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .result-panel {
+        margin-top: 28px;
+        background: rgba(125, 249, 194, 0.04);
+        border: 1px solid rgba(125, 249, 194, 0.2);
+        border-radius: var(--radius);
+        padding: 24px 28px;
+        display: none;
+        animation: slideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .result-panel.visible {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.99);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .result-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .result-badge {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        background: var(--accent);
+        color: #040f09;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-weight: 500;
+      }
+
+      .result-expiry-tag {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .result-expiry-tag svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.6;
+        stroke: currentColor;
+        fill: none;
+      }
+
+      .result-url-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 14px 16px;
+      }
+
+      #result-url {
+        font-family: var(--font-mono);
+        font-size: 15px;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: -0.2px;
+        flex: 1;
+        word-break: break-all;
+      }
+
+      .copy-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 7px 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .copy-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .copy-btn.copied {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-dim);
+      }
+      .copy-btn svg {
+        width: 13px;
+        height: 13px;
+        stroke: currentColor;
+        fill: none;
+      }
+
+      .result-meta {
+        margin-top: 12px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .result-meta-item {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .result-meta-item svg {
+        width: 11px;
+        height: 11px;
+        opacity: 0.5;
+        stroke: currentColor;
+        fill: none;
+      }
+      .result-meta-item span {
+        color: var(--text-muted);
+      }
+
+      .error-msg {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--error);
+        display: none;
+        margin-top: 4px;
+        padding-left: 4px;
+      }
+
+      .error-msg.visible {
+        display: block;
+      }
+      input.has-error {
+        border-color: var(--error) !important;
+      }
+
+      .stats-bar {
+        margin-top: 48px;
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        gap: 1px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat {
+        flex: 1;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 20px 24px;
+        text-align: center;
+        transition: background 0.2s;
+      }
+
+      .stat:first-child {
+        border-radius: var(--radius) 0 0 var(--radius);
+      }
+      .stat:last-child {
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+      .stat:hover {
+        background: var(--surface2);
+      }
+
+      .stat-num {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .stat-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        margin-top: 60px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-dim);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        letter-spacing: 0.04em;
+      }
+
+      @media (max-width: 520px) {
+        .card {
+          padding: 28px 22px;
+        }
+        .submit-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .btn-submit {
+          justify-content: center;
+        }
+        .stats-bar {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .stat {
+          border-radius: var(--radius) !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <div class="logo-dot"></div>
+        Snip
+      </div>
+      <div class="nav-tag">v2.0 · free tier</div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-eyebrow">URL Shortener</div>
+      <h1>Make long links<br /><span>disappear.</span></h1>
+      <p class="hero-sub">
+        Paste any URL. Set an alias. Control the expiry.<br />Get a clean,
+        trackable short link in seconds.
+      </p>
+    </div>
+
+    <div class="card">
+      <!-- Long URL -->
+      <div class="field-group">
+        <div class="field-label">
+          Destination URL <span class="req">*</span>
+          <span class="field-hint">must include https://</span>
+        </div>
+        <div class="input-wrap">
+          <svg
+            class="input-icon"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            />
+            <path
+              d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            />
+          </svg>
+          <input
+            type="url"
+            id="long-url"
+            placeholder="https://your-very-long-url.com/goes/right/here"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <div class="error-msg" id="url-error">
+          Please enter a valid URL starting with https://
+        </div>
+      </div>
+
+      <!-- Alias -->
+      <div class="field-group">
+        <div class="field-label">
+          Custom alias
+          <span class="field-hint">optional · 3–20 chars</span>
+        </div>
+        <div class="alias-wrap">
+          <div class="alias-prefix">snip.ly/</div>
+          <input
+            type="text"
+            id="alias"
+            placeholder="my-cool-link"
+            maxlength="20"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <div class="error-msg" id="alias-error">
+          Alias must be 3–20 chars: letters, numbers, - or _
+        </div>
+      </div>
+
+      <!-- Expiry -->
+      <div class="field-group">
+        <div class="field-label">Expiry</div>
+        <div class="pills" id="expiry-pills">
+          <div class="pill active" data-value="24h">24 hours</div>
+          <div class="pill" data-value="7d">7 days</div>
+          <div class="pill" data-value="14d">2 weeks</div>
+          <div class="pill" data-value="30d">30 days</div>
+          <div class="pill" data-value="never">Never</div>
+          <div class="pill" data-value="custom">
+            <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Custom date
+          </div>
+        </div>
+        <div class="custom-date-wrap" id="custom-date-wrap">
+          <div class="custom-date-label">Pick exact date &amp; time</div>
+          <input type="datetime-local" id="custom-date" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="submit-row">
+        <div class="submit-meta">
+          Free links &middot; No account needed<br />Analytics included on every
+          link
+        </div>
+        <button class="btn-submit" id="submit-btn" onclick="handleSubmit()">
+          <div class="spinner"></div>
+          <svg
+            class="btn-icon"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          Shorten URL
+        </button>
+      </div>
+
+      <!-- Result -->
+      <div class="result-panel" id="result-panel">
+        <div class="result-top">
+          <div class="result-badge">Link ready</div>
+          <div class="result-expiry-tag">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span id="expiry-display">Expires in 24 hours</span>
+          </div>
+        </div>
+        <div class="result-url-row">
+          <div id="result-url">snip.ly/loading</div>
+          <button class="copy-btn" id="copy-btn" onclick="copyUrl()">
+            <svg
+              id="copy-icon"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" />
+              <path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              />
+            </svg>
+            <span id="copy-label">Copy</span>
+          </button>
+        </div>
+        <div class="result-meta">
+          <div class="result-meta-item">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              />
+            </svg>
+            Original: <span id="result-original">—</span>
+          </div>
+          <div class="result-meta-item">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            Clicks: <span>0</span>
+          </div>
+          <div class="result-meta-item">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Created: <span id="result-date">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Expiry pill selection ──────────────────────────────────────────────
+      const pills = document.querySelectorAll(".pill");
+      const customWrap = document.getElementById("custom-date-wrap");
+      let selectedExpiry = "24h";
+
+      // Set the datetime-local min to now and default to +7 days
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      document.getElementById("custom-date").min = now
+        .toISOString()
+        .slice(0, 16);
+      document.getElementById("custom-date").value = new Date(
+        Date.now() +
+          7 * 24 * 60 * 60 * 1000 -
+          new Date().getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .slice(0, 16);
+
+      pills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+          pills.forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          selectedExpiry = pill.dataset.value;
+          customWrap.classList.toggle("visible", selectedExpiry === "custom");
+        });
+      });
+
+      // ── Helpers ───────────────────────────────────────────────────────────
+
+      /** Returns a human-readable expiry label for the result panel. */
+      function expiryLabel(val) {
+        const map = {
+          "24h": "Expires in 24 hours",
+          "7d": "Expires in 7 days",
+          "14d": "Expires in 2 weeks",
+          "30d": "Expires in 30 days",
+          never: "Never expires",
+        };
+        if (val === "custom") {
+          const d = document.getElementById("custom-date").value;
+          return d
+            ? "Expires " +
+                new Date(d).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })
+            : "Custom expiry";
+        }
+        return map[val] || "Expires in 24 hours";
+      }
+
+      /**
+       * Resolves the expiry value to send to Flask.
+       * - Preset keys ("24h", "7d", etc.) are sent as-is so Flask can compute the date.
+       * - "custom" is converted to an ISO 8601 string.
+       * - "never" is sent as null.
+       */
+      function resolveExpiry(val) {
+        if (val === "never") return null;
+        if (val === "custom") {
+          const d = document.getElementById("custom-date").value;
+          return d ? new Date(d).toISOString() : null;
+        }
+        return val; // "24h" | "7d" | "14d" | "30d"
+      }
+
+      /** Basic URL validation — must be http(s). */
+      function isValidUrl(str) {
+        try {
+          const u = new URL(str);
+          return u.protocol === "https:" || u.protocol === "http:";
+        } catch {
+          return false;
+        }
+      }
+
+      /** Alias format validation. */
+      function isValidAlias(str) {
+        return /^[a-zA-Z0-9_-]{3,20}$/.test(str);
+      }
+
+      /** Toggle the submit button's loading state. */
+      function setLoading(on) {
+        document.getElementById("submit-btn").classList.toggle("loading", on);
+      }
+
+      /** Show a field-level error message. */
+      function showFieldError(errorId, inputEl) {
+        document.getElementById(errorId).classList.add("visible");
+        if (inputEl) inputEl.classList.add("has-error");
+      }
+
+      // ── Main submit handler ───────────────────────────────────────────────
+      async function handleSubmit() {
+        const urlInput = document.getElementById("long-url");
+        const aliasInput = document.getElementById("alias");
+        const urlError = document.getElementById("url-error");
+        const aliasError = document.getElementById("alias-error");
+        const resultPanel = document.getElementById("result-panel");
+
+        // Reset previous errors and result
+        urlError.classList.remove("visible");
+        aliasError.classList.remove("visible");
+        urlInput.classList.remove("has-error");
+        aliasInput.classList.remove("has-error");
+        resultPanel.classList.remove("visible");
+
+        // ── Client-side validation ─────────────────────────────────────────
+        const longUrl = urlInput.value.trim();
+        const alias = aliasInput.value.trim();
+        let hasError = false;
+
+        if (!longUrl || !isValidUrl(longUrl)) {
+          showFieldError("url-error", urlInput);
+          hasError = true;
+        }
+
+        if (alias && !isValidAlias(alias)) {
+          showFieldError("alias-error", aliasInput);
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // ── Build payload ──────────────────────────────────────────────────
+        const payload = {
+          long_url: longUrl,
+          alias: alias || null, // omit empty alias
+          expiry: resolveExpiry(selectedExpiry), // ISO string | preset key | null
+        };
+
+        // ── Call Flask API ─────────────────────────────────────────────────
+        setLoading(true);
+        try {
+          const res = await fetch("/api/shorten", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const json = await res.json();
+
+          console.log(json);
+
+          if (!res.ok) {
+            // Flask returned an error (e.g. 400 alias taken, 422 validation)
+            alert(json.error || "Something went wrong. Please try again.");
+            return;
+          }
+
+          // ── Render result ────────────────────────────────────────────────
+          document.getElementById("result-url").textContent = json.short_url;
+          document.getElementById("result-original").textContent =
+            longUrl.length > 40 ? longUrl.slice(0, 40) + "…" : longUrl;
+          document.getElementById("result-date").textContent =
+            new Date().toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            });
+          document.getElementById("expiry-display").textContent =
+            expiryLabel(selectedExpiry);
+
+          resultPanel.classList.add("visible");
+          resultPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } catch (err) {
+          // Network / JSON parse failure
+          alert("Network error — is the Flask server running?");
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      // ── Copy button ───────────────────────────────────────────────────────
+      function copyUrl() {
+        const url = document.getElementById("result-url").textContent;
+        navigator.clipboard.writeText(url).then(() => {
+          const btn = document.getElementById("copy-btn");
+          const icon = document.getElementById("copy-icon");
+          const label = document.getElementById("copy-label");
+          btn.classList.add("copied");
+          label.textContent = "Copied!";
+          icon.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            label.textContent = "Copy";
+            icon.innerHTML =
+              '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+          }, 2200);
+        });
+      }
+
+      // ── Enter key shortcut ────────────────────────────────────────────────
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Enter" &&
+          document.activeElement !== document.getElementById("custom-date")
+        ) {
+          handleSubmit();
+        }
+      });
+    </script>
+  </body>
+</html>
