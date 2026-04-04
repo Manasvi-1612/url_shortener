@@ -37,9 +37,7 @@
         --radius-sm: 8px;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
       body {
         background: var(--bg);
@@ -70,11 +68,7 @@
         transform: translateX(-50%);
         width: 700px;
         height: 500px;
-        background: radial-gradient(
-          ellipse,
-          rgba(125, 249, 194, 0.06) 0%,
-          transparent 70%
-        );
+        background: radial-gradient(ellipse, rgba(125, 249, 194, 0.06) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
       }
@@ -110,15 +104,8 @@
       }
 
       @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.6;
-          transform: scale(0.85);
-        }
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(0.85); }
       }
 
       .nav-tag {
@@ -171,9 +158,7 @@
         margin-bottom: 18px;
       }
 
-      h1 span {
-        color: var(--accent);
-      }
+      h1 span { color: var(--accent); }
 
       .hero-sub {
         font-family: var(--font-mono);
@@ -194,9 +179,7 @@
         transition: border-color 0.3s;
       }
 
-      .card:hover {
-        border-color: var(--border-hover);
-      }
+      .card:hover { border-color: var(--border-hover); }
 
       .card::before {
         content: "";
@@ -227,11 +210,7 @@
         gap: 8px;
       }
 
-      .field-label .req {
-        color: var(--accent);
-        font-size: 14px;
-        line-height: 1;
-      }
+      .field-label .req { color: var(--accent); font-size: 14px; line-height: 1; }
       .field-hint {
         font-family: var(--font-mono);
         font-size: 10px;
@@ -240,9 +219,7 @@
         letter-spacing: 0.04em;
       }
 
-      .input-wrap {
-        position: relative;
-      }
+      .input-wrap { position: relative; }
 
       .input-wrap svg.input-icon {
         position: absolute;
@@ -273,9 +250,7 @@
         -webkit-appearance: none;
       }
 
-      input::placeholder {
-        color: var(--text-dim);
-      }
+      input::placeholder { color: var(--text-dim); }
 
       input:focus {
         border-color: rgba(125, 249, 194, 0.4);
@@ -283,9 +258,7 @@
         box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.06);
       }
 
-      .input-wrap:focus-within svg.input-icon {
-        opacity: 0.7;
-      }
+      .input-wrap:focus-within svg.input-icon { opacity: 0.7; }
 
       .alias-wrap {
         display: flex;
@@ -321,16 +294,9 @@
         box-shadow: none !important;
       }
 
-      .alias-wrap input:focus {
-        background: transparent;
-        border: none;
-      }
+      .alias-wrap input:focus { background: transparent; border: none; }
 
-      .pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
+      .pills { display: flex; flex-wrap: wrap; gap: 8px; }
 
       .pill {
         font-family: var(--font-mono);
@@ -349,10 +315,7 @@
         gap: 5px;
       }
 
-      .pill:hover {
-        border-color: rgba(125, 249, 194, 0.3);
-        color: var(--text);
-      }
+      .pill:hover { border-color: rgba(125, 249, 194, 0.3); color: var(--text); }
 
       .pill.active {
         border-color: var(--accent);
@@ -361,12 +324,7 @@
         box-shadow: 0 0 12px rgba(125, 249, 194, 0.1);
       }
 
-      .pill svg {
-        width: 11px;
-        height: 11px;
-        stroke: currentColor;
-        fill: none;
-      }
+      .pill svg { width: 11px; height: 11px; stroke: currentColor; fill: none; }
 
       .custom-date-wrap {
         display: none;
@@ -375,9 +333,7 @@
         margin-top: 10px;
       }
 
-      .custom-date-wrap.visible {
-        display: flex;
-      }
+      .custom-date-wrap.visible { display: flex; }
 
       .custom-date-label {
         font-family: var(--font-mono);
@@ -401,15 +357,9 @@
         transition: box-shadow 0.2s;
       }
 
-      input[type="datetime-local"]:focus {
-        box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.08);
-      }
+      input[type="datetime-local"]:focus { box-shadow: 0 0 0 3px rgba(125, 249, 194, 0.08); }
 
-      .divider {
-        height: 1px;
-        background: var(--border);
-        margin: 28px 0;
-      }
+      .divider { height: 1px; background: var(--border); margin: 28px 0; }
 
       .submit-row {
         display: flex;
@@ -417,13 +367,6 @@
         justify-content: space-between;
         gap: 16px;
         flex-wrap: wrap;
-      }
-
-      .submit-meta {
-        font-family: var(--font-mono);
-        font-size: 11px;
-        color: var(--text-dim);
-        line-height: 1.6;
       }
 
       .btn-submit {
@@ -446,24 +389,10 @@
         white-space: nowrap;
       }
 
-      .btn-submit:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 30px rgba(125, 249, 194, 0.25);
-      }
-      .btn-submit:active {
-        transform: translateY(0);
-      }
-      .btn-submit.loading {
-        pointer-events: none;
-        opacity: 0.75;
-      }
-      .btn-submit svg.btn-icon {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
-        fill: none;
-        flex-shrink: 0;
-      }
+      .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(125, 249, 194, 0.25); }
+      .btn-submit:active { transform: translateY(0); }
+      .btn-submit.loading { pointer-events: none; opacity: 0.75; }
+      .btn-submit svg.btn-icon { width: 16px; height: 16px; stroke: currentColor; fill: none; flex-shrink: 0; }
 
       .spinner {
         width: 14px;
@@ -476,18 +405,10 @@
         flex-shrink: 0;
       }
 
-      .btn-submit.loading .spinner {
-        display: block;
-      }
-      .btn-submit.loading .btn-icon {
-        display: none;
-      }
+      .btn-submit.loading .spinner { display: block; }
+      .btn-submit.loading .btn-icon { display: none; }
 
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
+      @keyframes spin { to { transform: rotate(360deg); } }
 
       .result-panel {
         margin-top: 28px;
@@ -499,27 +420,14 @@
         animation: slideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
 
-      .result-panel.visible {
-        display: block;
-      }
+      .result-panel.visible { display: block; }
 
       @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px) scale(0.99);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+        from { opacity: 0; transform: translateY(10px) scale(0.99); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
       }
 
-      .result-top {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 16px;
-      }
+      .result-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 
       .result-badge {
         font-family: var(--font-mono);
@@ -543,13 +451,7 @@
         gap: 5px;
       }
 
-      .result-expiry-tag svg {
-        width: 11px;
-        height: 11px;
-        opacity: 0.6;
-        stroke: currentColor;
-        fill: none;
-      }
+      .result-expiry-tag svg { width: 11px; height: 11px; opacity: 0.6; stroke: currentColor; fill: none; }
 
       .result-url-row {
         display: flex;
@@ -588,28 +490,11 @@
         flex-shrink: 0;
       }
 
-      .copy-btn:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-      .copy-btn.copied {
-        border-color: var(--accent);
-        color: var(--accent);
-        background: var(--accent-dim);
-      }
-      .copy-btn svg {
-        width: 13px;
-        height: 13px;
-        stroke: currentColor;
-        fill: none;
-      }
+      .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+      .copy-btn.copied { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+      .copy-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-      .result-meta {
-        margin-top: 12px;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
+      .result-meta { margin-top: 12px; display: flex; gap: 20px; flex-wrap: wrap; }
 
       .result-meta-item {
         font-family: var(--font-mono);
@@ -620,16 +505,8 @@
         gap: 5px;
       }
 
-      .result-meta-item svg {
-        width: 11px;
-        height: 11px;
-        opacity: 0.5;
-        stroke: currentColor;
-        fill: none;
-      }
-      .result-meta-item span {
-        color: var(--text-muted);
-      }
+      .result-meta-item svg { width: 11px; height: 11px; opacity: 0.5; stroke: currentColor; fill: none; }
+      .result-meta-item span { color: var(--text-muted); }
 
       .error-msg {
         font-family: var(--font-mono);
@@ -640,12 +517,229 @@
         padding-left: 4px;
       }
 
-      .error-msg.visible {
-        display: block;
+      .error-msg.visible { display: block; }
+      input.has-error { border-color: var(--error) !important; }
+
+      /* ── Links list section ─────────────────────────────────────── */
+
+      .links-section {
+        width: 100%;
+        max-width: 720px;
+        position: relative;
+        z-index: 1;
+        margin-top: 48px;
       }
-      input.has-error {
-        border-color: var(--error) !important;
+
+      .links-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
       }
+
+      .links-title {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .links-count {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        background: var(--accent-dim);
+        color: var(--accent);
+        border: 1px solid rgba(125, 249, 194, 0.2);
+        padding: 3px 10px;
+        border-radius: 999px;
+        letter-spacing: 0.06em;
+      }
+
+      .links-refresh {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-dim);
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 0.04em;
+      }
+
+      .links-refresh:hover { border-color: var(--border-hover); color: var(--text-muted); }
+
+      .links-refresh svg {
+        width: 12px;
+        height: 12px;
+        stroke: currentColor;
+        fill: none;
+        transition: transform 0.4s;
+      }
+
+      .links-refresh.spinning svg { animation: spin 0.6s linear infinite; }
+
+      .links-empty {
+        text-align: center;
+        padding: 60px 20px;
+        border: 1px dashed var(--border);
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .links-empty-icon {
+        width: 40px;
+        height: 40px;
+        opacity: 0.15;
+      }
+
+      .links-empty-text {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-dim);
+        letter-spacing: 0.04em;
+        line-height: 1.7;
+      }
+
+      .links-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 48px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-dim);
+        letter-spacing: 0.06em;
+      }
+
+      .links-loading .mini-spinner {
+        width: 14px;
+        height: 14px;
+        border: 1.5px solid var(--border-hover);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+
+      .links-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /* Individual link card */
+      .link-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 22px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: border-color 0.25s, transform 0.2s;
+        animation: cardIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+
+      @keyframes cardIn {
+        from { opacity: 0; transform: translateY(8px) scale(0.98); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .link-card:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+
+      .link-card-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(125, 249, 194, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .link-card-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; }
+
+      .link-card-body { flex: 1; min-width: 0; }
+
+      .link-card-short {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: -0.2px;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .link-card-long {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .link-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 8px;
+        flex-wrap: wrap;
+      }
+
+      .link-meta-chip {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        text-transform: uppercase;
+      }
+
+      .link-meta-chip svg { width: 10px; height: 10px; stroke: currentColor; fill: none; opacity: 0.6; }
+
+      .link-meta-chip.expiry-soon { color: #ffb347; }
+      .link-meta-chip.no-expiry { color: var(--accent); opacity: 0.6; }
+
+      .link-card-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+      .action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: var(--text-muted);
+      }
+
+      .action-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+      .action-btn.copied { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+      .action-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
       .stats-bar {
         margin-top: 48px;
@@ -666,15 +760,9 @@
         transition: background 0.2s;
       }
 
-      .stat:first-child {
-        border-radius: var(--radius) 0 0 var(--radius);
-      }
-      .stat:last-child {
-        border-radius: 0 var(--radius) var(--radius) 0;
-      }
-      .stat:hover {
-        background: var(--surface2);
-      }
+      .stat:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+      .stat:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+      .stat:hover { background: var(--surface2); }
 
       .stat-num {
         font-size: 26px;
@@ -705,23 +793,13 @@
       }
 
       @media (max-width: 520px) {
-        .card {
-          padding: 28px 22px;
-        }
-        .submit-row {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .btn-submit {
-          justify-content: center;
-        }
-        .stats-bar {
-          flex-direction: column;
-          gap: 8px;
-        }
-        .stat {
-          border-radius: var(--radius) !important;
-        }
+        .card { padding: 28px 22px; }
+        .submit-row { flex-direction: column; align-items: stretch; }
+        .btn-submit { justify-content: center; }
+        .stats-bar { flex-direction: column; gap: 8px; }
+        .stat { border-radius: var(--radius) !important; }
+        .link-card { flex-wrap: wrap; }
+        .link-card-actions { width: 100%; justify-content: flex-end; }
       }
     </style>
   </head>
@@ -751,31 +829,13 @@
           <span class="field-hint">must include https://</span>
         </div>
         <div class="input-wrap">
-          <svg
-            class="input-icon"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
-            />
-            <path
-              d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
-            />
+          <svg class="input-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
           </svg>
-          <input
-            type="url"
-            id="long-url"
-            placeholder="https://your-very-long-url.com/goes/right/here"
-            autocomplete="off"
-            spellcheck="false"
-          />
+          <input type="url" id="long-url" placeholder="https://your-very-long-url.com/goes/right/here" autocomplete="off" spellcheck="false"/>
         </div>
-        <div class="error-msg" id="url-error">
-          Please enter a valid URL starting with https://
-        </div>
+        <div class="error-msg" id="url-error">Please enter a valid URL starting with https://</div>
       </div>
 
       <!-- Alias -->
@@ -786,18 +846,9 @@
         </div>
         <div class="alias-wrap">
           <div class="alias-prefix">snip.ly/</div>
-          <input
-            type="text"
-            id="alias"
-            placeholder="my-cool-link"
-            maxlength="20"
-            autocomplete="off"
-            spellcheck="false"
-          />
+          <input type="text" id="alias" placeholder="my-cool-link" maxlength="20" autocomplete="off" spellcheck="false"/>
         </div>
-        <div class="error-msg" id="alias-error">
-          Alias must be 3–20 chars: letters, numbers, - or _
-        </div>
+        <div class="error-msg" id="alias-error">Alias must be 3–20 chars: letters, numbers, - or _</div>
       </div>
 
       <!-- Expiry -->
@@ -811,17 +862,17 @@
           <div class="pill" data-value="never">Never</div>
           <div class="pill" data-value="custom">
             <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
             Custom date
           </div>
         </div>
         <div class="custom-date-wrap" id="custom-date-wrap">
           <div class="custom-date-label">Pick exact date &amp; time</div>
-          <input type="datetime-local" id="custom-date" />
+          <input type="datetime-local" id="custom-date"/>
         </div>
       </div>
 
@@ -830,27 +881,21 @@
       <div class="submit-row">
         <button class="btn-submit" id="submit-btn" onclick="handleSubmit()">
           <div class="spinner"></div>
-          <svg
-            class="btn-icon"
-            viewBox="0 0 24 24"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
+          <svg class="btn-icon" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
           Shorten URL
         </button>
       </div>
 
-      <!-- Result -->
+      <!-- Inline result panel (still shown after submit) -->
       <div class="result-panel" id="result-panel">
         <div class="result-top">
           <div class="result-badge">Link ready</div>
           <div class="result-expiry-tag">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
             </svg>
             <span id="expiry-display">Expires in 24 hours</span>
           </div>
@@ -858,16 +903,9 @@
         <div class="result-url-row">
           <div id="result-url">snip.ly/loading</div>
           <button class="copy-btn" id="copy-btn" onclick="copyUrl()">
-            <svg
-              id="copy-icon"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke-linecap="round"
-            >
-              <rect x="9" y="9" width="13" height="13" rx="2" />
-              <path
-                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-              />
+            <svg id="copy-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
             <span id="copy-label">Copy</span>
           </button>
@@ -875,26 +913,24 @@
         <div class="result-meta">
           <div class="result-meta-item">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              />
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
             Original: <span id="result-original">—</span>
           </div>
           <div class="result-meta-item">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
             </svg>
             Clicks: <span>0</span>
           </div>
           <div class="result-meta-item">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
             Created: <span id="result-date">—</span>
           </div>
@@ -902,25 +938,55 @@
       </div>
     </div>
 
+    <!-- ── All Links Section ──────────────────────────────────── -->
+    <section class="links-section">
+      <div class="links-header">
+        <div class="links-title">
+          All links
+          <span class="links-count" id="links-count">0</span>
+        </div>
+        <button class="links-refresh" id="refresh-btn" onclick="fetchAllLinks()">
+          <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          Refresh
+        </button>
+      </div>
+
+      <!-- Loading state -->
+      <div class="links-loading" id="links-loading">
+        <div class="mini-spinner"></div>
+        Fetching links…
+      </div>
+
+      <!-- Empty state -->
+      <div class="links-empty" id="links-empty" style="display:none;">
+        <svg class="links-empty-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+        <div class="links-empty-text">No links yet. Shorten your first URL above.</div>
+      </div>
+
+      <!-- Links list -->
+      <div class="links-list" id="links-list"></div>
+    </section>
+
+    <footer>snip · open source · built with flask</footer>
+
     <script>
-      // ── Expiry pill selection ──────────────────────────────────────────────
+      // ── Expiry pill selection ─────────────────────────────────────────────
       const pills = document.querySelectorAll(".pill");
       const customWrap = document.getElementById("custom-date-wrap");
       let selectedExpiry = "24h";
 
-      // Set the datetime-local min to now and default to +7 days
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-      document.getElementById("custom-date").min = now
-        .toISOString()
-        .slice(0, 16);
+      document.getElementById("custom-date").min = now.toISOString().slice(0, 16);
       document.getElementById("custom-date").value = new Date(
-        Date.now() +
-          7 * 24 * 60 * 60 * 1000 -
-          new Date().getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .slice(0, 16);
+        Date.now() + 7 * 24 * 60 * 60 * 1000 - new Date().getTimezoneOffset() * 60000
+      ).toISOString().slice(0, 16);
 
       pills.forEach((pill) => {
         pill.addEventListener("click", () => {
@@ -933,68 +999,172 @@
 
       // ── Helpers ───────────────────────────────────────────────────────────
 
-      /** Returns a human-readable expiry label for the result panel. */
       function expiryLabel(val) {
-        const map = {
-          "24h": "Expires in 24 hours",
-          "7d": "Expires in 7 days",
-          "14d": "Expires in 2 weeks",
-          "30d": "Expires in 30 days",
-          never: "Never expires",
-        };
+        const map = { "24h": "Expires in 24 hours", "7d": "Expires in 7 days", "14d": "Expires in 2 weeks", "30d": "Expires in 30 days", never: "Never expires" };
         if (val === "custom") {
           const d = document.getElementById("custom-date").value;
-          return d
-            ? "Expires " +
-                new Date(d).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })
-            : "Custom expiry";
+          return d ? "Expires " + new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "Custom expiry";
         }
         return map[val] || "Expires in 24 hours";
       }
 
-      /**
-       * Resolves the expiry value to send to Flask.
-       * - Preset keys ("24h", "7d", etc.) are sent as-is so Flask can compute the date.
-       * - "custom" is converted to an ISO 8601 string.
-       * - "never" is sent as null.
-       */
       function resolveExpiry(val) {
         if (val === "never") return null;
         if (val === "custom") {
           const d = document.getElementById("custom-date").value;
           return d ? new Date(d).toISOString() : null;
         }
-        return val; // "24h" | "7d" | "14d" | "30d"
+        return val;
       }
 
-      /** Basic URL validation — must be http(s). */
       function isValidUrl(str) {
-        try {
-          const u = new URL(str);
-          return u.protocol === "https:" || u.protocol === "http:";
-        } catch {
-          return false;
-        }
+        try { const u = new URL(str); return u.protocol === "https:" || u.protocol === "http:"; }
+        catch { return false; }
       }
 
-      /** Alias format validation. */
-      function isValidAlias(str) {
-        return /^[a-zA-Z0-9_-]{3,20}$/.test(str);
-      }
+      function isValidAlias(str) { return /^[a-zA-Z0-9_-]{3,20}$/.test(str); }
 
-      /** Toggle the submit button's loading state. */
-      function setLoading(on) {
-        document.getElementById("submit-btn").classList.toggle("loading", on);
-      }
+      function setLoading(on) { document.getElementById("submit-btn").classList.toggle("loading", on); }
 
-      /** Show a field-level error message. */
       function showFieldError(errorId, inputEl) {
         document.getElementById(errorId).classList.add("visible");
         if (inputEl) inputEl.classList.add("has-error");
+      }
+
+      /**
+       * Format an ISO expiry string into a short human label.
+       * Returns null if no expiry.
+       */
+      function formatExpiry(isoString) {
+        if (!isoString) return null;
+        const exp = new Date(isoString);
+        const now = new Date();
+        const diffMs = exp - now;
+        if (diffMs <= 0) return "Expired";
+        const diffH = Math.floor(diffMs / 36e5);
+        const diffD = Math.floor(diffMs / 864e5);
+        if (diffH < 24) return `Expires in ${diffH}h`;
+        if (diffD < 7)  return `Expires in ${diffD}d`;
+        return "Expires " + exp.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      }
+
+      function truncate(str, max) {
+        return str.length > max ? str.slice(0, max) + "…" : str;
+      }
+
+      // ── Build a single link card DOM element ──────────────────────────────
+      function buildLinkCard(link, prepend = false) {
+        const card = document.createElement("div");
+        card.className = "link-card";
+        // Stagger animation only when building from initial fetch
+        if (!prepend) card.style.animationDelay = "0ms";
+
+        const expiryText = link.expires_at ? formatExpiry(link.expires_at) : "Never expires";
+        const expiryClass = !link.expires_at
+          ? "link-meta-chip no-expiry"
+          : expiryText === "Expired"
+            ? "link-meta-chip expiry-soon"
+            : "link-meta-chip";
+
+        const createdDate = link.created_at
+          ? new Date(link.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+          : "—";
+
+        card.innerHTML = `
+          <div class="link-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+          </div>
+          <div class="link-card-body">
+            <div class="link-card-short">snip.ly/${link.short_code}</div>
+            <div class="link-card-long" title="${link.long_url}">${truncate(link.long_url, 60)}</div>
+            <div class="link-card-meta">
+              <span class="${expiryClass}">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                ${expiryText}
+              </span>
+              <span class="link-meta-chip">
+                <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                ${createdDate}
+              </span>
+            </div>
+          </div>
+          <div class="link-card-actions">
+            <button class="action-btn" title="Copy short link" onclick="copyCardUrl(this, 'snip.ly/${link.short_code}')">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+          </div>
+        `;
+        return card;
+      }
+
+      // ── Render the full links list ────────────────────────────────────────
+      function renderLinks(links) {
+        const list = document.getElementById("links-list");
+        const empty = document.getElementById("links-empty");
+        const countEl = document.getElementById("links-count");
+
+        list.innerHTML = "";
+        countEl.textContent = links.length;
+
+        if (links.length === 0) {
+          empty.style.display = "flex";
+          return;
+        }
+
+        empty.style.display = "none";
+        links.forEach((link, i) => {
+          const card = buildLinkCard(link);
+          card.style.animationDelay = `${i * 40}ms`;
+          list.appendChild(card);
+        });
+      }
+
+      // ── Prepend a single new card to the top of the list ─────────────────
+      function prependLinkCard(link) {
+        const list = document.getElementById("links-list");
+        const empty = document.getElementById("links-empty");
+        const countEl = document.getElementById("links-count");
+
+        // Hide empty state if it was showing
+        empty.style.display = "none";
+
+        const card = buildLinkCard(link, true);
+        list.insertBefore(card, list.firstChild);
+
+        // Update count
+        const prev = parseInt(countEl.textContent, 10) || 0;
+        countEl.textContent = prev + 1;
+      }
+
+      // ── Fetch all links from Flask ────────────────────────────────────────
+      async function fetchAllLinks() {
+        const loadingEl = document.getElementById("links-loading");
+        const refreshBtn = document.getElementById("refresh-btn");
+
+        loadingEl.style.display = "flex";
+        document.getElementById("links-list").innerHTML = "";
+        document.getElementById("links-empty").style.display = "none";
+        refreshBtn.classList.add("spinning");
+
+        try {
+          const res = await fetch("/api/links");
+          if (!res.ok) throw new Error("Failed to fetch links");
+          const json = await res.json();
+          renderLinks(json.links || []);
+        } catch (err) {
+          document.getElementById("links-empty").style.display = "flex";
+          document.getElementById("links-empty").querySelector(".links-empty-text").textContent =
+            "Could not load links — is the Flask server running?";
+        } finally {
+          loadingEl.style.display = "none";
+          refreshBtn.classList.remove("spinning");
+        }
       }
 
       // ── Main submit handler ───────────────────────────────────────────────
@@ -1005,38 +1175,26 @@
         const aliasError = document.getElementById("alias-error");
         const resultPanel = document.getElementById("result-panel");
 
-        // Reset previous errors and result
         urlError.classList.remove("visible");
         aliasError.classList.remove("visible");
         urlInput.classList.remove("has-error");
         aliasInput.classList.remove("has-error");
         resultPanel.classList.remove("visible");
 
-        // ── Client-side validation ─────────────────────────────────────────
         const longUrl = urlInput.value.trim();
         const alias = aliasInput.value.trim();
         let hasError = false;
 
-        if (!longUrl || !isValidUrl(longUrl)) {
-          showFieldError("url-error", urlInput);
-          hasError = true;
-        }
-
-        if (alias && !isValidAlias(alias)) {
-          showFieldError("alias-error", aliasInput);
-          hasError = true;
-        }
-
+        if (!longUrl || !isValidUrl(longUrl)) { showFieldError("url-error", urlInput); hasError = true; }
+        if (alias && !isValidAlias(alias)) { showFieldError("alias-error", aliasInput); hasError = true; }
         if (hasError) return;
 
-        // ── Build payload ──────────────────────────────────────────────────
         const payload = {
           long_url: longUrl,
-          alias: alias || null, // omit empty alias
-          expiry: resolveExpiry(selectedExpiry), // ISO string | preset key | null
+          alias: alias || null,
+          expiry: resolveExpiry(selectedExpiry),
         };
 
-        // ── Call Flask API ─────────────────────────────────────────────────
         setLoading(true);
         try {
           const res = await fetch("/api/shorten", {
@@ -1047,38 +1205,37 @@
 
           const json = await res.json();
 
-          console.log(json);
-
           if (!res.ok) {
-            // Flask returned an error (e.g. 400 alias taken, 422 validation)
             alert(json.error || "Something went wrong. Please try again.");
             return;
           }
 
-          // ── Render result ────────────────────────────────────────────────
-          document.getElementById("result-url").textContent = json.short_url;
-          document.getElementById("result-original").textContent =
-            longUrl.length > 40 ? longUrl.slice(0, 40) + "…" : longUrl;
-          document.getElementById("result-date").textContent =
-            new Date().toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            });
-          document.getElementById("expiry-display").textContent =
-            expiryLabel(selectedExpiry);
-
+          // ── Update inline result panel ────────────────────────────────
+          document.getElementById("result-url").textContent = `snip.ly/${json.short_url}`;
+          document.getElementById("result-original").textContent = truncate(longUrl, 40);
+          document.getElementById("result-date").textContent = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+          document.getElementById("expiry-display").textContent = expiryLabel(selectedExpiry);
           resultPanel.classList.add("visible");
           resultPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+          // ── Prepend new card to the links list ────────────────────────
+          prependLinkCard({
+            short_code: json.short_url,
+            long_url: longUrl,
+            expires_at: resolveExpiry(selectedExpiry) !== selectedExpiry
+              ? resolveExpiry(selectedExpiry)   // ISO string (custom) or null (never)
+              : null,                           // preset keys don't give us a timestamp here
+            created_at: new Date().toISOString(),
+          });
+
         } catch (err) {
-          // Network / JSON parse failure
           alert("Network error — is the Flask server running?");
         } finally {
           setLoading(false);
         }
       }
 
-      // ── Copy button ───────────────────────────────────────────────────────
+      // ── Copy button (inline result) ───────────────────────────────────────
       function copyUrl() {
         const url = document.getElementById("result-url").textContent;
         navigator.clipboard.writeText(url).then(() => {
@@ -1091,21 +1248,32 @@
           setTimeout(() => {
             btn.classList.remove("copied");
             label.textContent = "Copy";
-            icon.innerHTML =
-              '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+            icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+          }, 2200);
+        });
+      }
+
+      // ── Copy button (per card) ────────────────────────────────────────────
+      function copyCardUrl(btn, url) {
+        navigator.clipboard.writeText(url).then(() => {
+          btn.classList.add("copied");
+          btn.innerHTML = '<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="20 6 9 17 4 12"/></svg>';
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.innerHTML = '<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
           }, 2200);
         });
       }
 
       // ── Enter key shortcut ────────────────────────────────────────────────
       document.addEventListener("keydown", (e) => {
-        if (
-          e.key === "Enter" &&
-          document.activeElement !== document.getElementById("custom-date")
-        ) {
+        if (e.key === "Enter" && document.activeElement !== document.getElementById("custom-date")) {
           handleSubmit();
         }
       });
+
+      // ── Load links on page ready ──────────────────────────────────────────
+      fetchAllLinks();
     </script>
   </body>
 </html>
